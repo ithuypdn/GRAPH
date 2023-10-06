@@ -105,16 +105,15 @@ class Graph {
     void dfs(int start) {
         Stack<Integer> stack = new Stack<>();
         stack.push(start);
-        visited[start] = true;
         while(!stack.isEmpty()) {
             int current = stack.pop();
-            System.out.print(" ---> " + intToChar(current));
-            for (int i = n; i >= 1; i--)
-                if(!visited[i] && G[current][i] == 1) {
-                    visited[i] = true;
-                    stack.push(i);
-                }
-                    
+            if(!visited[current]) {
+                visited[current] = true;
+                System.out.print(" ---> " + intToChar(current));
+                for (int i = n; i >= 1; i--)
+                    if(G[current][i] == 1)
+                        stack.push(i);
+            }     
         }
         System.out.println("");
     }
@@ -157,7 +156,6 @@ public class Main {
         Graph G2 = new Graph();
         G2.display();
         G2.dfs(1);
-        System.out.println(G2.connected() + " " + G2.count);
     }
     
 }
